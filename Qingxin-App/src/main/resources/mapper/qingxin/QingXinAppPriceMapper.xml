@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qingxin.app.mapper.CrmAppPriceMapper">
+    <resultMap type="com.qingxin.app.domain.dto.CrmAppPrice" id="AppPriceResult">
+        <result property="id"    column="id"    />
+        <result property="appId"    column="app_id"    />
+        <result property="price"    column="price"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="appTimestamp"    column="app_timestamp"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <resultMap type="com.qingxin.app.domain.vo.AppPriceVO" id="AppPriceVOResult">
+        <result property="appId"    column="app_id"    />
+        <result property="id"    column="id"    />
+        <result property="appName"    column="appName"    />
+        <result property="priceName"    column="priceName"    />
+        <result property="price"    column="price"    />
+        <result property="startAmount"    column="startAmount"    />
+        <result property="endAmount"    column="endAmount"    />
+        <result property="appTimestamp"    column="app_timestamp"    />
+    </resultMap>
+
+    <select id="list" parameterType="com.qingxin.app.domain.vo.AppPriceVO" resultType="com.qingxin.app.domain.vo.AppPriceVO">
+        select b.app_name,a.price_name,a.price,a.app_timestamp from  crm_app_price as a  left join  sys_app  as b  on a.app_id = b.id
+        <where>
+            <if test="appId != null and appId != ''"> and a.app_id = #{appId}</if>
+            <if test="appName != null and appName != ''"> and b.app_name LIKE CONCAT('%',#{appName},'%')</if>
+            <if test="id != null and id != ''"> and a.id = #{id}</if>
+            <if test="priceName != null and priceName != ''"> and a.price_name LIKE CONCAT('%',#{priceName},'%')</if>
+            <if test="price != null and price != ''"> and a.price = #{price}</if>
+            <if test="appTimestamp != null"> and a.app_timestamp = #{appTimestamp}</if>
+            <if test="startAmount != null"> and a.price &gt;= #{startAmount}</if>
+            <if test="endAmount != null"> and a.price &lt;= #{endAmount}</if>
+        </where>
+    </select>
+</mapper>

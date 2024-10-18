@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qingxin.app.mapper.QingXinAppMapper">
+
+    <resultMap type="SysApp" id="SysAppResult">
+        <result property="id"    column="id"    />
+        <result property="logo"    column="logo"    />
+        <result property="appName"    column="app_name"    />
+        <result property="description"    column="description"    />
+        <result property="address"    column="address"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="appStatus"    column="app_status"    />
+        <result property="appUrl"    column="app_url"    />
+    </resultMap>
+
+    <sql id="selectSysAppVo">
+        select id, logo, app_name, description, address, create_time, create_by, update_time, update_by, app_status ,app_url from sys_app
+    </sql>
+
+    <select id="selectSysAppList" parameterType="com.qingxin.app.domain.dto.SysApp" resultMap="SysAppResult">
+        select a.id,a.app_name,a.description,a.address,b.path,a.create_time,a.app_status
+        from sys_app as a
+        left join crm_file as b on a.id = b.busi_id
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="logo != null  and logo != ''"> and logo = #{logo}</if>
+            <if test="appName != null  and appName != ''"> and app_name like concat('%', #{appName}, '%')</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="appStatus != null "> and app_status = #{appStatus}</if>
+        </where>
+        ORDER BY a.create_time DESC
+    </select>
+</mapper>
