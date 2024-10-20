@@ -208,9 +208,9 @@
 
  
 
-git clone https://github.com/your-repo/qingxin-app-market.git
+git clone https://github.com/quakestone/QingxinApp.git
 
-cd qingxin-app-market
+cd QingxinApp
 
 mvn clean install
 
@@ -222,7 +222,7 @@ mvn clean install
 
  
 
-java -jar target/qingxin-app-market.jar
+java -jar target/QingxinApp.jar
 
  
 
@@ -237,6 +237,12 @@ java -jar target/qingxin-app-market.jar
 ​	•	QuakeAppPrice.sol
 
 ​	•	QuakeAppTime.sol
+
+
+
+流程图
+
+![](pic/FlowChart.png)
 
  
 
@@ -280,13 +286,9 @@ java -jar target/qingxin-app-market.jar
 
  
 
-如有问题，请通过以下方式联系我们：
+氢信总基座阅读文档:   https://github.com/quakestone/QingXinSaaS/blob/main/README.md
 
- 
 
-​	•	邮箱：support@qingxin.com
-
-​	•	GitHub Issues: https://github.com/your-repo/issues
 
  
 
